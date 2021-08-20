@@ -32,6 +32,43 @@ Methods:
 ```js
 class Queue {
   // your code goes here
+  constructor(capacity = Infinity) {
+    this.storage = [];
+    this.capacity = capacity;
+    this.isNext = null;
+  }
+
+  get length() {
+    return this.storage.length;
+  }
+  set length(para) {}
+
+  enqueue(ele) {
+    if (this.length === this.capacity) {
+      alert('Queue is overflowing');
+    } else {
+      this.storage.push(ele);
+      return this.length;
+    }
+  }
+  dequeue() {
+    if (this.length === 0) {
+      alert('stack is empty');
+    } else {
+      return this.storage.shift();
+    }
+  }
+  peek() {
+    return this.storage[0];
+  }
+  printAll() {
+    this.storage.forEach((ele) => {
+      console.log(ele);
+    });
+  }
+  isEmpty() {
+    return this.length === 0 ? true : false;
+  }
 }
 
 // Test 1
@@ -116,6 +153,53 @@ Methods:
 ```js
 class Queue {
   // your code goes here
+  constructor(capacity = Infinity) {
+    this.storage = {};
+    this.capacity = capacity;
+    this.isNext = null;
+  }
+
+  get length() {
+    return Object.keys(this.storage).length;
+  }
+  set length(para) {}
+
+  enqueue(ele) {
+    if (this.length === this.capacity) {
+      alert('Queue is overflowing');
+    } else {
+      if (this.length === 0) {
+        this.storage[0] = ele;
+        this.isNext = 0;
+      } else {
+        let lastIndex = Object.keys(this.storage)[this.length - 1];
+        this.storage[Number(lastIndex) + 1] = ele;
+      }
+      return this.length;
+    }
+  }
+  dequeue() {
+    if (this.length === 0) {
+      alert('stack is empty');
+    } else {
+      delete this.storage[this.isNext];
+
+      this.isNext = this.isNext + 1;
+      return 'deleted';
+    }
+  }
+  peek() {
+    return this.storage[this.isNext];
+  }
+  printAll() {
+    let arr = Object.keys(this.storage);
+    arr.forEach((ele) => {
+      console.log(this.storage[ele]);
+    });
+  }
+  isEmpty() {
+    return Object.keys(this.storage).length === 0 ? true : false;
+  }
 }
 
 // Test 1
